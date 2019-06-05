@@ -9,20 +9,22 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController {
-
-    @IBOutlet var webView: WKWebView!
+class WebViewController: UIViewController, WKUIDelegate {
+    
+    var webView: WKWebView!
     
     var passedUrl = ""
-    var navTitle = ""
+    
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        if navTitle != "" {
-            self.title = navTitle
-        }
         
         if passedUrl != "" {
             if let url = URL(string: passedUrl) {
@@ -31,7 +33,10 @@ class WebViewController: UIViewController {
         }
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: Selector(("refreshClicked")))
-
+    }
+    
+    @objc func refreshClicked() {
+        webView.reload()
     }
 
 }

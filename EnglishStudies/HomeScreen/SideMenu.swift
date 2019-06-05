@@ -11,6 +11,7 @@ import UIKit
 class SideMenu: NSObject {
 }
 
+/*
 extension HomePageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 15
@@ -127,3 +128,4 @@ extension HomePageViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
 }
+*/

@@ -8,51 +8,50 @@
 
 import UIKit
 
-class ProfessorsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    @IBOutlet var tableOutlet: UITableView!
+class ProfessorsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let professors = ["Mishra", "Kukler", "Gettys", "Hu", "Jones", "Kennedy", "Kyburz", "Letcher", "Muench", "Mustafa", "Oelschlegel", "Philippian", "Ross", "White", "Wielgos"]
     var professorSelected: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.backgroundColor = UIColor(red:142/255, green:37/255, blue:49/255, alpha:1.0)
+        
         self.title = "Professors"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        collectionView.register(ProfessorCell.self, forCellWithReuseIdentifier: "cellId")
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return professors.count
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = view.frame.height / 2.5
+        return CGSize(width: view.frame.width, height: height)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad) {
-            return 500;
-        } else {
-            return 216;
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ProfessorsTableViewCell
-        
-        cell.cellImage.image = UIImage(named: professors[indexPath.row])
-        
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ProfessorCell
+        cell.cellImageView.image = UIImage(named: professors[indexPath.item])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        professorSelected = professors[indexPath.row]
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showProfessorDetails", sender: self)
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return professors.count
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ProfessorDetailViewController {
-            if let professorLastName = professorSelected {
-                destination.professorLastName = professorLastName
-            }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfessorDetailViewController") as! ProfessorDetailViewController
+        
+        professorSelected = professors[indexPath.item]
+        if let professorLast = professorSelected {
+            vc.professorLastName = professorLast
         }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
-
 }
