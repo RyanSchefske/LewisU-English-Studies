@@ -15,11 +15,17 @@
 		3D09BEC9228D02DF0053E2CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D09BEC8228D02DF0053E2CC /* Assets.xcassets */; };
 		3D09BECC228D02DF0053E2CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D09BECA228D02DF0053E2CC /* LaunchScreen.storyboard */; };
 		3D09BED4228D03090053E2CC /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D09BED3228D03090053E2CC /* HomePageViewController.swift */; };
+		3D10F94422A8262A008B36C9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F94322A8262A008B36C9 /* HeaderView.swift */; };
 		3D40545F22A190AE00F50679 /* MenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40545E22A190AE00F50679 /* MenuLauncher.swift */; };
 		3D40546122A1B1B400F50679 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40546022A1B1B400F50679 /* HomeCell.swift */; };
 		3D40546322A1B43900F50679 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40546222A1B43900F50679 /* SettingCell.swift */; };
 		3D40548822A6FBC100F50679 /* ProfessorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40548722A6FBC100F50679 /* ProfessorCell.swift */; };
-		3D6E791F2297113D001D75A9 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E791E2297113D001D75A9 /* SideMenu.swift */; };
+		3D4B9CDF22A981C90073274C /* DigitalGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CDE22A981C90073274C /* DigitalGalleryViewController.swift */; };
+		3D4B9CE122A981D60073274C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CE022A981D60073274C /* SettingsViewController.swift */; };
+		3D4B9CE322A981E00073274C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CE222A981E00073274C /* AboutViewController.swift */; };
+		3D4B9CE522A989EB0073274C /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CE422A989EB0073274C /* TableCell.swift */; };
+		3D4B9CE722A98DA00073274C /* DigitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CE622A98DA00073274C /* DigitalCell.swift */; };
+		3D4B9CE922A991EF0073274C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B9CE822A991EF0073274C /* ImageZoomViewController.swift */; };
 		3D6E792222971469001D75A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6E792122971469001D75A9 /* WebKit.framework */; };
 		3D9261D5228F704C003F37B4 /* ProfessorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9261D4228F704C003F37B4 /* ProfessorsViewController.swift */; };
 		3DAAFEEF2290AC2E002B02E6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAAFEEE2290AC2E002B02E6 /* WebViewController.swift */; };
@@ -37,11 +43,17 @@
 		3D09BECB228D02DF0053E2CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D09BECD228D02DF0053E2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D09BED3228D03090053E2CC /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		3D10F94322A8262A008B36C9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		3D40545E22A190AE00F50679 /* MenuLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncher.swift; sourceTree = "<group>"; };
 		3D40546022A1B1B400F50679 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		3D40546222A1B43900F50679 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		3D40548722A6FBC100F50679 /* ProfessorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorCell.swift; sourceTree = "<group>"; };
-		3D6E791E2297113D001D75A9 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		3D4B9CDE22A981C90073274C /* DigitalGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalGalleryViewController.swift; sourceTree = "<group>"; };
+		3D4B9CE022A981D60073274C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3D4B9CE222A981E00073274C /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3D4B9CE422A989EB0073274C /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		3D4B9CE622A98DA00073274C /* DigitalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalCell.swift; sourceTree = "<group>"; };
+		3D4B9CE822A991EF0073274C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		3D6E792122971469001D75A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3D9261D4228F704C003F37B4 /* ProfessorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessorsViewController.swift; sourceTree = "<group>"; };
 		3DAAFEEE2290AC2E002B02E6 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -127,10 +139,32 @@
 				3DCFE2BB22987A4300EC6CEC /* HomeScreen */,
 				3D011C1C22999C88002B74A6 /* Professors */,
 				3D011C1D22999CEF002B74A6 /* Web */,
+				3D4B9CDC22A9818F0073274C /* DigitalGallery */,
+				3D4B9CDD22A981A30073274C /* Settings */,
 				3D09BECD228D02DF0053E2CC /* Info.plist */,
 				3D011C212299A4D6002B74A6 /* GoogleService-Info.plist */,
 			);
 			path = EnglishStudies;
+			sourceTree = "<group>";
+		};
+		3D4B9CDC22A9818F0073274C /* DigitalGallery */ = {
+			isa = PBXGroup;
+			children = (
+				3D4B9CDE22A981C90073274C /* DigitalGalleryViewController.swift */,
+				3D4B9CE622A98DA00073274C /* DigitalCell.swift */,
+				3D4B9CE822A991EF0073274C /* ImageZoomViewController.swift */,
+			);
+			path = DigitalGallery;
+			sourceTree = "<group>";
+		};
+		3D4B9CDD22A981A30073274C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3D4B9CE022A981D60073274C /* SettingsViewController.swift */,
+				3D4B9CE422A989EB0073274C /* TableCell.swift */,
+				3D4B9CE222A981E00073274C /* AboutViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		3D6E792022971469001D75A9 /* Frameworks */ = {
@@ -149,7 +183,7 @@
 				3D40545E22A190AE00F50679 /* MenuLauncher.swift */,
 				3D40546022A1B1B400F50679 /* HomeCell.swift */,
 				3D40546222A1B43900F50679 /* SettingCell.swift */,
-				3D6E791E2297113D001D75A9 /* SideMenu.swift */,
+				3D10F94322A8262A008B36C9 /* HeaderView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -270,15 +304,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DAAFEEF2290AC2E002B02E6 /* WebViewController.swift in Sources */,
+				3D4B9CE722A98DA00073274C /* DigitalCell.swift in Sources */,
 				3D9261D5228F704C003F37B4 /* ProfessorsViewController.swift in Sources */,
 				3D09BED4228D03090053E2CC /* HomePageViewController.swift in Sources */,
+				3D4B9CE322A981E00073274C /* AboutViewController.swift in Sources */,
+				3D4B9CDF22A981C90073274C /* DigitalGalleryViewController.swift in Sources */,
 				3D40548822A6FBC100F50679 /* ProfessorCell.swift in Sources */,
-				3D6E791F2297113D001D75A9 /* SideMenu.swift in Sources */,
 				3D40546322A1B43900F50679 /* SettingCell.swift in Sources */,
 				3D40546122A1B1B400F50679 /* HomeCell.swift in Sources */,
+				3D10F94422A8262A008B36C9 /* HeaderView.swift in Sources */,
+				3D4B9CE922A991EF0073274C /* ImageZoomViewController.swift in Sources */,
+				3D4B9CE122A981D60073274C /* SettingsViewController.swift in Sources */,
 				3D40545F22A190AE00F50679 /* MenuLauncher.swift in Sources */,
 				3D09BEBF228D02DD0053E2CC /* AppDelegate.swift in Sources */,
 				3D09BEC7228D02DD0053E2CC /* EnglishStudies.xcdatamodeld in Sources */,
+				3D4B9CE522A989EB0073274C /* TableCell.swift in Sources */,
 				3DF8311C228F877A00B5A31E /* ProfessorDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

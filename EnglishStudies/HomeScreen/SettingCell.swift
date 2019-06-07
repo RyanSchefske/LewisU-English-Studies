@@ -12,9 +12,11 @@ class SettingCell: BaseCell {
     
     override var isHighlighted: Bool {
         didSet {
-            backgroundColor = isHighlighted ? UIColor.darkGray : UIColor.white
-            nameLabel.textColor = isHighlighted ? UIColor.white : UIColor.black
-            iconImageView.tintColor = isHighlighted ? UIColor.white : UIColor.darkGray
+            if setting?.name != "English Studies @ LewisU" {
+                backgroundColor = isHighlighted ? UIColor.darkGray : UIColor.white
+                nameLabel.textColor = isHighlighted ? UIColor.white : UIColor.black
+                iconImageView.tintColor = isHighlighted ? UIColor.white : UIColor.darkGray
+            }
         }
     }
     
@@ -31,7 +33,7 @@ class SettingCell: BaseCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Setting"
-        label.font = UIFont.systemFont(ofSize: 13)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     

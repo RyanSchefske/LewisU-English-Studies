@@ -25,14 +25,13 @@ class WebViewController: UIViewController, WKUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: Selector(("refreshClicked")))
         
         if passedUrl != "" {
             if let url = URL(string: passedUrl) {
                 webView.load(URLRequest(url: url))
             }
         }
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: Selector(("refreshClicked")))
     }
     
     @objc func refreshClicked() {

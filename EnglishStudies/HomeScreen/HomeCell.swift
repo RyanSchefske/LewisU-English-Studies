@@ -45,8 +45,6 @@ class HomeCell: UICollectionViewCell {
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
-        imageView.layer.shadowColor = UIColor.lightGray.cgColor
-        imageView.layer.shadowOffset = CGSize(width: 10, height: 10)
         return imageView
     }()
     
@@ -85,13 +83,13 @@ class HomeCell: UICollectionViewCell {
         
         //subTitleLabel Constraints
         //Left Constriant
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .left, relatedBy: .equal, toItem: cellImageView, attribute: .left, multiplier: 1, constant: 4))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .left, relatedBy: .equal, toItem: cellImageView, attribute: .left, multiplier: 1, constant: 8))
         
         //Right Constraint
         addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .right, relatedBy: .equal, toItem: cellImageView, attribute: .right, multiplier: 1, constant: 4))
         
         //Bottom Constraint
-        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .bottom, relatedBy: .equal, toItem: cellImageView, attribute: .bottom, multiplier: 1, constant: -4))
+        addConstraint(NSLayoutConstraint(item: subTitleLabel, attribute: .bottom, relatedBy: .equal, toItem: cellImageView, attribute: .bottom, multiplier: 1, constant: -8))
         
         //titleLabel Constraints
         //Left Constraint
