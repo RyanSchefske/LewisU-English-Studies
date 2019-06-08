@@ -23,7 +23,7 @@ class HomeItems: NSObject {
 class HomePageViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let homeItems: [HomeItems] = {
-        return [HomeItems(cellTitle: "News and Events", cellSubTitle: "Current Events", imageName: "NewsEvents"), HomeItems(cellTitle: "English Studies Facebook", cellSubTitle: "", imageName: "Facebook"), HomeItems(cellTitle: "The English Department Online", cellSubTitle: "", imageName: "English"), HomeItems(cellTitle: "World Language Program", cellSubTitle: "Find information on the multitude of languages we study here at Lewis - Grow Your Brain!", imageName: "WorldLanguages"), HomeItems(cellTitle: "Film Studies Program", cellSubTitle: "", imageName: "FilmStudies"), HomeItems(cellTitle: "Writing Center", cellSubTitle: "Make an appointment with a tutor to review and revise your paper for every course", imageName: "WritingCenter"), HomeItems(cellTitle: "OWL - Online Writing Center", cellSubTitle: "Your online writing handbook, providing guides and resources for writing in every form", imageName: "OWL"), HomeItems(cellTitle: "Jet Fuel Review", cellSubTitle: "A bi-annual, student-run literary journal", imageName: "JetFuel"), HomeItems(cellTitle: "The Jet Fuel Blog", cellSubTitle: "A High-Octane Literary Blog", imageName: "JetFuelBlog"), HomeItems(cellTitle: "Windows Fine Arts Magazine", cellSubTitle: "An annual publication that highlights the creative talents of members at Lewis", imageName: "WindowsFineArts"), HomeItems(cellTitle: "Romeoville Campus on GPS", cellSubTitle: "Find your way to department offices or classrooms.", imageName: "DeLasalle"), HomeItems(cellTitle: "A Digital Gallery", cellSubTitle: "Photos taken during deparment events", imageName: "DigitalGallery"), HomeItems(cellTitle: "A Chat Room for Students", cellSubTitle: "A chat room for students using the English studies at LewisU app", imageName: "CornerChatRoom"), HomeItems(cellTitle: "Find Your Professor - Contacts", cellSubTitle: "Connect with your professors", imageName: "Professors")]
+        return [HomeItems(cellTitle: "News and Events", cellSubTitle: "Current Events", imageName: "NewsEvents"), HomeItems(cellTitle: "English Studies Facebook", cellSubTitle: "", imageName: "Facebook"), HomeItems(cellTitle: "The English Department Online", cellSubTitle: "", imageName: "English"), HomeItems(cellTitle: "World Language Program", cellSubTitle: "Find information on the multitude of languages we study here at Lewis - Grow Your Brain!", imageName: "WorldLanguages"), HomeItems(cellTitle: "Film Studies Program", cellSubTitle: "", imageName: "FilmStudies"), HomeItems(cellTitle: "Writing Center", cellSubTitle: "Make an appointment with a tutor to review and revise your paper for every course", imageName: "WritingCenter"), HomeItems(cellTitle: "OWL - Online Writing Center", cellSubTitle: "Your online writing handbook, providing guides and resources for writing in every form", imageName: "OWL"), HomeItems(cellTitle: "Jet Fuel Review", cellSubTitle: "A bi-annual, student-run literary journal", imageName: "JetFuel"), HomeItems(cellTitle: "The Jet Fuel Blog", cellSubTitle: "A High-Octane Literary Blog", imageName: "JetFuelBlog"), HomeItems(cellTitle: "Windows Fine Arts Magazine", cellSubTitle: "An annual publication that highlights the creative talents of members at Lewis", imageName: "WindowsFineArts"), HomeItems(cellTitle: "Romeoville Campus on GPS", cellSubTitle: "Find your way to department offices or classrooms.", imageName: "DeLasalle"), HomeItems(cellTitle: "A Digital Gallery", cellSubTitle: "Photos taken during department events", imageName: "DigitalGallery"), HomeItems(cellTitle: "A Chat Room for Students", cellSubTitle: "A chat room for students using the English studies at LewisU app", imageName: "CornerChatRoom"), HomeItems(cellTitle: "Find Your Professor - Contacts", cellSubTitle: "Connect with your professors", imageName: "Professors")]
     }()
     
     var passedUrl = ""
@@ -31,29 +31,7 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if launchedBefore  {
-            print("Not first launch.")
-        } else {
-            print("First launch, setting UserDefault.")
-            firstLaunchAlert()
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-        }
-        
-        navigationItem.title = "LewisU English Studies"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.isTranslucent = false
-        
-        collectionView.backgroundColor = UIColor(red:142/255, green:37/255, blue:49/255, alpha:1.0)
-        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(handleMenu))
-        navigationItem.leftBarButtonItem?.tintColor = .white
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleMenu))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(swipeRight)
+        setupView()
     }
     
     lazy var menuLauncher: MenuLauncher = {
@@ -138,7 +116,7 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.alpha = 0
-        cell.contentView.alpha = 0.3
+        cell.contentView.alpha = 0
         cell.layer.transform = CATransform3DMakeScale(0.25, 0.25, 0.25)
                 
         UIView.animate(withDuration: 0.65) {
@@ -146,6 +124,94 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
             cell.contentView.alpha = 1
             cell.layer.transform = CATransform3DScale(CATransform3DIdentity, 1, 1, 1)
         }
+    }
+    
+    let imageView = UIImageView()
+    var height: CGFloat = 200
+    
+    func setupView() {
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        } else {
+            print("First launch, setting UserDefault.")
+            firstLaunchAlert()
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+        }
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            height = 350
+        } else {
+            height = 200
+        }
+        
+        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+        imageView.image = UIImage.init(named: "EnglishStudies")
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
+        
+        self.collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
+        navigationItem.title = "LewisU English Studies"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.isTranslucent = false
+        collectionView.backgroundColor = UIColor(red:142/255, green:37/255, blue:49/255, alpha:1.0)
+        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellId")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(handleMenu))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleMenu))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
+    /*
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HeaderView
+        
+        headerView.cellImageView.image = UIImage(named: "EnglishStudies")
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            headerView.frame.size.height = 350
+        } else {
+            headerView.frame.size.height = 200
+        }
+        
+        return headerView
+    }
+    
+    var height: CGFloat = 200
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            height = 350
+            return CGSize(width: collectionView.frame.width, height: height)
+        } else {
+            height = 200
+            return CGSize(width: collectionView.frame.width, height: height)
+        }
+    } */
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y: Int = Int(height - (scrollView.contentOffset.y + height))
+        var max = 400
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            max = 750
+        }
+        let heightFrame: Int = min(y, max)
+        
+        if heightFrame >= 0 && heightFrame < (max / 2) {
+            let alphaFloat: Float = (Float(heightFrame) / Float(max)) * Float(2)
+            imageView.alpha = CGFloat(alphaFloat)
+        } else if heightFrame < 0 {
+            imageView.alpha = 0
+        } else {
+            imageView.alpha = 1
+        }
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.size.width), height: heightFrame)
     }
     
     func showWebForSetting(setting: Setting, url: String) {

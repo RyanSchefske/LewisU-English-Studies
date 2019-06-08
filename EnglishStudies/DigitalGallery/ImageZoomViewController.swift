@@ -21,7 +21,7 @@ class ImageZoomViewController: UIViewController {
     let imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "pin")
+        //image.image = UIImage(named: "pin")
         return image
     }()
     

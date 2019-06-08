@@ -37,8 +37,16 @@ class DigitalGalleryViewController: UICollectionViewController, UICollectionView
         navigationController?.pushViewController(imageZoom, animated: true)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 6
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 3.25, height: 150)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: collectionView.frame.width / 3.2, height: 300)
+        } else {
+            return CGSize(width: collectionView.frame.width / 3.2, height: 150)
+        }
     }
     
 }
