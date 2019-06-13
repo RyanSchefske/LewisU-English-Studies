@@ -176,7 +176,9 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
                 } else if indexPath.item == 15 {
                     self.homePageController?.showDigitalGallery()
                 } else if indexPath.item == 16 {
-                    self.homePageController?.showWebForSetting(setting: setting, url: "https://us21.chatzy.com/66919120381232")
+                    let chatController = ChatViewController()
+                    self.homePageController?.navigationController?.pushViewController(chatController, animated: true)
+                    //self.homePageController?.showWebForSetting(setting: setting, url: "https://us21.chatzy.com/66919120381232")
                 } else if indexPath.item == 17 {
                     let layout = UICollectionViewFlowLayout()
                     self.homePageController?.navigationController?.pushViewController(ProfessorsViewController(collectionViewLayout: layout), animated: true)

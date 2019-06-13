@@ -106,8 +106,10 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
             }
         } else if indexPath.item == 11 {
             showDigitalGallery()
-        } else if indexPath.item == 12 { 
-            showWebController(homeItem: itemSelected, url: "https://us21.chatzy.com/66919120381232")
+        } else if indexPath.item == 12 {
+            let chatController = ChatViewController()
+            navigationController?.pushViewController(chatController, animated: true)
+            //showWebController(homeItem: itemSelected, url: "https://us21.chatzy.com/66919120381232")
         } else if indexPath.item == 13 {
             let layout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(ProfessorsViewController(collectionViewLayout: layout), animated: true)
@@ -166,33 +168,6 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
     }
-    
-    /*
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HeaderView
-        
-        headerView.cellImageView.image = UIImage(named: "EnglishStudies")
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            headerView.frame.size.height = 350
-        } else {
-            headerView.frame.size.height = 200
-        }
-        
-        return headerView
-    }
-    
-    var height: CGFloat = 200
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            height = 350
-            return CGSize(width: collectionView.frame.width, height: height)
-        } else {
-            height = 200
-            return CGSize(width: collectionView.frame.width, height: height)
-        }
-    } */
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y: Int = Int(height - (scrollView.contentOffset.y + height))
