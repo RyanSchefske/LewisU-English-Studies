@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		32D2EE95B953B7BCDA61D6B3 /* Pods_EnglishStudies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9431D208B817CC0966F7CCDB /* Pods_EnglishStudies.framework */; };
+		3D0179C322B94E2600F0B4D4 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0179C222B94E2600F0B4D4 /* DatabaseRepresentation.swift */; };
 		3D09BEBF228D02DD0053E2CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D09BEBE228D02DD0053E2CC /* AppDelegate.swift */; };
 		3D09BEC4228D02DD0053E2CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D09BEC2228D02DD0053E2CC /* Main.storyboard */; };
 		3D09BEC7228D02DD0053E2CC /* EnglishStudies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D09BEC5228D02DD0053E2CC /* EnglishStudies.xcdatamodeld */; };
@@ -17,6 +18,8 @@
 		3D0C041222B178860090B78D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0C041122B178860090B78D /* GoogleService-Info.plist */; };
 		3D0C041422B19F620090B78D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0C041322B19F620090B78D /* ChatViewController.swift */; };
 		3D10F94422A8262A008B36C9 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D10F94322A8262A008B36C9 /* HeaderView.swift */; };
+		3D27507E22B8AEB4003CA7B5 /* ChatLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D27507D22B8AEB4003CA7B5 /* ChatLogInViewController.swift */; };
+		3D27508022B8AF68003CA7B5 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D27507F22B8AF68003CA7B5 /* Messages.swift */; };
 		3D40545F22A190AE00F50679 /* MenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40545E22A190AE00F50679 /* MenuLauncher.swift */; };
 		3D40546122A1B1B400F50679 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40546022A1B1B400F50679 /* HomeCell.swift */; };
 		3D40546322A1B43900F50679 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D40546222A1B43900F50679 /* SettingCell.swift */; };
@@ -36,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		1ED65F3769A482683A7B42FE /* Pods-EnglishStudies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnglishStudies.release.xcconfig"; path = "Pods/Target Support Files/Pods-EnglishStudies/Pods-EnglishStudies.release.xcconfig"; sourceTree = "<group>"; };
+		3D0179C222B94E2600F0B4D4 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
 		3D09BEBB228D02DD0053E2CC /* EnglishStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnglishStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D09BEBE228D02DD0053E2CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D09BEC3228D02DD0053E2CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 		3D0C041122B178860090B78D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D0C041322B19F620090B78D /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		3D10F94322A8262A008B36C9 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3D27507D22B8AEB4003CA7B5 /* ChatLogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogInViewController.swift; sourceTree = "<group>"; };
+		3D27507F22B8AF68003CA7B5 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		3D40545E22A190AE00F50679 /* MenuLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncher.swift; sourceTree = "<group>"; };
 		3D40546022A1B1B400F50679 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		3D40546222A1B43900F50679 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
@@ -197,6 +203,9 @@
 			isa = PBXGroup;
 			children = (
 				3D0C041322B19F620090B78D /* ChatViewController.swift */,
+				3D27507F22B8AF68003CA7B5 /* Messages.swift */,
+				3D0179C222B94E2600F0B4D4 /* DatabaseRepresentation.swift */,
+				3D27507D22B8AEB4003CA7B5 /* ChatLogInViewController.swift */,
 				3DE628B622B0B594009683D8 /* ChatDisplayNameViewController.swift */,
 			);
 			path = ChatRoom;
@@ -304,6 +313,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -319,6 +330,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputBarAccessoryView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -372,11 +385,14 @@
 				3D4B9CE722A98DA00073274C /* DigitalCell.swift in Sources */,
 				3D9261D5228F704C003F37B4 /* ProfessorsViewController.swift in Sources */,
 				3D09BED4228D03090053E2CC /* HomePageViewController.swift in Sources */,
+				3D27507E22B8AEB4003CA7B5 /* ChatLogInViewController.swift in Sources */,
 				3DE628B722B0B594009683D8 /* ChatDisplayNameViewController.swift in Sources */,
 				3D4B9CE322A981E00073274C /* AboutViewController.swift in Sources */,
+				3D0179C322B94E2600F0B4D4 /* DatabaseRepresentation.swift in Sources */,
 				3D4B9CDF22A981C90073274C /* DigitalGalleryViewController.swift in Sources */,
 				3D40548822A6FBC100F50679 /* ProfessorCell.swift in Sources */,
 				3D40546322A1B43900F50679 /* SettingCell.swift in Sources */,
+				3D27508022B8AF68003CA7B5 /* Messages.swift in Sources */,
 				3D40546122A1B1B400F50679 /* HomeCell.swift in Sources */,
 				3D10F94422A8262A008B36C9 /* HeaderView.swift in Sources */,
 				3D0C041422B19F620090B78D /* ChatViewController.swift in Sources */,

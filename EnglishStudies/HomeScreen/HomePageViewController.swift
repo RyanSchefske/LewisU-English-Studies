@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeItems: NSObject {
     let cellTitle: String
@@ -107,9 +108,14 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
         } else if indexPath.item == 11 {
             showDigitalGallery()
         } else if indexPath.item == 12 {
-            let chatController = ChatViewController()
-            navigationController?.pushViewController(chatController, animated: true)
-            //showWebController(homeItem: itemSelected, url: "https://us21.chatzy.com/66919120381232")
+            if Auth.auth().currentUser != nil {
+                let chatController = ChatViewController()
+                chatController.member = Member(name: Auth.auth().currentUser!.displayName!)
+                navigationController?.pushViewController(chatController, animated: true)
+            } else {
+                let logInController = ChatLogInViewController()
+                navigationController?.pushViewController(logInController, animated: true)
+            }
         } else if indexPath.item == 13 {
             let layout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(ProfessorsViewController(collectionViewLayout: layout), animated: true)

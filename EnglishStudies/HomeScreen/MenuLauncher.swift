@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 //Menu Items
 class Setting: NSObject {
@@ -34,9 +35,7 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
     let settings: [Setting] = {
         return [Setting(name: "English Studies @ LewisU", imageName: "home"), Setting(name: "News and Events", imageName: "document"), Setting(name: "English Studies on Facebook", imageName: "facebook"), Setting(name: "Portfolium", imageName: "resume"), Setting(name: "The English Department", imageName: "emailAt"), Setting(name: "World Languages Program", imageName: "graduationCap"), Setting(name: "Film Studies Program", imageName: "film"), Setting(name: "Writing Center", imageName: "pencil"), Setting(name: "OWL - Online Writing Center", imageName: "website"), Setting(name: "Resources for Research", imageName: "search"), Setting(name: "Resources for Writers", imageName: "writer"), Setting(name: "Jet Fuel Review", imageName: "globe"), Setting(name: "The Jet Fuel Blog", imageName: "airplane"), Setting(name: "Windows Fine Arts Magazine", imageName: "magazine"), Setting(name: "Romeoville Campus on GPS", imageName: "pin"), Setting(name: "Digital Gallery", imageName: "gallery"), Setting(name: "Chat Room for Students", imageName: "chat"), Setting(name: "Professors", imageName: "contacts"), Setting(name: "Podcasts", imageName: "headphones"), Setting(name: "Settings", imageName: "settings"), Setting(name: "About", imageName: "info")]
     }()
-    
     var homePageController: HomePageViewController?
-    
     let cellHeight: CGFloat = 60
     
     @objc func showMenu() {
@@ -176,9 +175,14 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
                 } else if indexPath.item == 15 {
                     self.homePageController?.showDigitalGallery()
                 } else if indexPath.item == 16 {
-                    let chatController = ChatViewController()
-                    self.homePageController?.navigationController?.pushViewController(chatController, animated: true)
-                    //self.homePageController?.showWebForSetting(setting: setting, url: "https://us21.chatzy.com/66919120381232")
+                    if Auth.auth().currentUser != nil {
+                        let chatController = ChatViewController()
+                        chatController.member = Member(name: Auth.auth().currentUser!.displayName!)
+                        self.homePageController?.navigationController?.pushViewController(chatController, animated: true)
+                    } else {
+                        let logInController = ChatLogInViewController()
+                        self.homePageController?.navigationController?.pushViewController(logInController, animated: true)
+                    }
                 } else if indexPath.item == 17 {
                     let layout = UICollectionViewFlowLayout()
                     self.homePageController?.navigationController?.pushViewController(ProfessorsViewController(collectionViewLayout: layout), animated: true)
