@@ -47,6 +47,7 @@ extension ChatLogInViewController: FUIAuthDelegate {
             print(error)
         } else {
             self.navigationController?.popViewController(animated: true)
+            self.navigationController?.pushViewController(ChatViewController(member: Member(name: Auth.auth().currentUser!.displayName!)), animated: true)
         }
         
     }

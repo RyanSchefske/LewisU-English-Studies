@@ -27,47 +27,33 @@ class ChatViewController: MessagesViewController {
         messageListener?.remove()
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        activityIndicatorView = UIActivityIndicatorView(style: .gray)
-        messagesCollectionView.backgroundView = activityIndicatorView
+    init(member: Member) {
+        self.member = member
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadMessages()
+        
+        view.backgroundColor = .white
+        navigationItem.title = "Chat"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutButtonPressed))
+        messageInputBar.inputTextView.placeholderLabel.text = "Message"
+        maintainPositionOnKeyboardFrameChanged = true
+        messageInputBar.sendButton.setTitleColor(UIColor(red: 0, green: 122 / 255, blue: 1, alpha: 1), for: .normal)
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messageCellDelegate = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if messages == [] {
-            activityIndicatorView.startAnimating()
-            
-            dispatchQueue.async {
-                OperationQueue.main.addOperation {
-                    self.loadMessages()
-                    self.activityIndicatorView.stopAnimating()
-                    self.messagesCollectionView.reloadData()
-                }
-            }
-        }
-
-        view.backgroundColor = .white
-        navigationItem.title = "Chat"
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutButtonPressed))
-        messageInputBar.inputTextView.placeholderLabel.text = "Message"
-        
-        messages = messages.sorted(by: { $0.sentDate < $1.sentDate})
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToBottom(animated: true)
     }
     
     func loadMessages() {
@@ -112,7 +98,9 @@ class ChatViewController: MessagesViewController {
         messages = messages.sorted(by: { $0.sentDate < $1.sentDate})
 
         messagesCollectionView.reloadData()
-        self.messagesCollectionView.scrollToBottom()
+        DispatchQueue.main.async {
+            self.messagesCollectionView.scrollToBottom(animated: true)
+        }
     }
     
     func handleDocumentChange(_ change: DocumentChange) {
@@ -165,29 +153,31 @@ extension ChatViewController: MessagesDataSource {
 }
 
 extension ChatViewController: MessagesLayoutDelegate {
-    func heightForLocation(message: MessageType,
-                           at indexPath: IndexPath,
-                           with maxWidth: CGFloat,
-                           in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        
-        return 0
+    
+    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return .zero
     }
-}
-
-extension ChatViewController: MessagesDisplayDelegate {
-    func configureAvatarView(
-        _ avatarView: AvatarView,
-        for message: MessageType,
-        at indexPath: IndexPath,
-        in messagesCollectionView: MessagesCollectionView) {
-        
-        avatarView.isHidden = true
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
             layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
             layout.textMessageSizeCalculator.incomingAvatarSize = .zero
         }
     }
+    
+    func footerViewSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return CGSize(width: 0, height: 8)
+    }
+    
+    func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        
+        return 0
+    }
+}
+
+extension ChatViewController: MessagesDisplayDelegate {
+    
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         if isFromCurrentSender(message: message) {
@@ -215,20 +205,45 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 extension ChatViewController: MessageCellDelegate {
     func didTapMessage(in cell: MessageCollectionViewCell) {
         if let indexPath = messagesCollectionView.indexPath(for: cell) {
-            print(messages[indexPath.section])
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let reportAction = UIAlertAction(title: "Report message", style: .destructive) { (action) in
+                print("didPress report")
+                print(self.messages[indexPath.section].text)
+                let reportRef = self.db.collection("messages")
+                    .whereField("content", isEqualTo: self.messages[indexPath.section].text)
+                    .whereField("senderName", isEqualTo: self.messages[indexPath.section].member.name)
+                    .getDocuments(completion: { (querySnapshot, error) in
+                    if error != nil {
+                        print("Error")
+                    } else if querySnapshot!.documents.count != 1 {
+                        print("Error finding document")
+                    } else {
+                        let document = querySnapshot!.documents.first
+                        if var reports = document!.data()["reports"] as? Int {
+                            reports += 1
+                            if reports >= 3 {
+                                document?.reference.delete(completion: { (error) in
+                                    if error != nil {
+                                        print(error?.localizedDescription)
+                                    } else {
+                                        self.messagesCollectionView.reloadData()
+                                    }
+                                })
+                            } else {
+                                document?.reference.updateData([ "reports": reports])
+                            }
+                        }
+                    }
+                })
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                //Dismiss Alert
+            }
+            
+            actionSheet.addAction(reportAction)
+            actionSheet.addAction(cancelAction)
+            self.present(actionSheet, animated: true, completion: nil)
         }
-        
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let reportAction = UIAlertAction(title: "Report message", style: .destructive) { (action) in
-            print("didPress report")
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            //Dismiss Alert
-        }
-        
-        actionSheet.addAction(reportAction)
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true, completion: nil)
     }
 }
 

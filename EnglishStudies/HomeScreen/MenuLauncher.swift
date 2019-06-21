@@ -176,7 +176,7 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
                     self.homePageController?.showDigitalGallery()
                 } else if indexPath.item == 16 {
                     if Auth.auth().currentUser != nil {
-                        let chatController = ChatViewController()
+                        let chatController = ChatViewController(member: Member(name: Auth.auth().currentUser!.displayName!))
                         chatController.member = Member(name: Auth.auth().currentUser!.displayName!)
                         self.homePageController?.navigationController?.pushViewController(chatController, animated: true)
                     } else {

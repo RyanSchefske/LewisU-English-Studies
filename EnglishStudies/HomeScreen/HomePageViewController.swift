@@ -109,7 +109,7 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
             showDigitalGallery()
         } else if indexPath.item == 12 {
             if Auth.auth().currentUser != nil {
-                let chatController = ChatViewController()
+                let chatController = ChatViewController(member: Member(name: Auth.auth().currentUser!.displayName!))
                 chatController.member = Member(name: Auth.auth().currentUser!.displayName!)
                 navigationController?.pushViewController(chatController, animated: true)
             } else {

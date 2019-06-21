@@ -68,6 +68,7 @@ extension Message: DatabaseRepresentation {
             "senderName": sender.displayName
         ]
         rep["content"] = text
+        rep["reports"] = 0
         return rep
     }
 }
