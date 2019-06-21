@@ -18,14 +18,16 @@ struct Member {
 struct Message {
     var member: Member
     let text: String
-    let messageId: String
+    var messageId: String
     var sentDate: Date
+    var sender: SenderType
     
-    init(member: Member, content: String) {
+    init(member: Member, content: String, date: Date) {
         self.member = Member(name: member.name)
         self.text = content
-        self.sentDate = Date()
+        self.sentDate = date
         self.messageId = UUID().uuidString
+        self.sender = Sender(id: member.name, displayName: member.name)
     }
     
     init?(document: QueryDocumentSnapshot) {
@@ -39,8 +41,9 @@ struct Message {
         }
         
         member = Member(name: senderName)
+        sender = Sender(id: member.name, displayName: member.name)
         sentDate = date
-        messageId = UUID().uuidString
+        messageId = document.documentID
         
         if let content = data["content"] as? String {
             self.text = content
@@ -51,13 +54,6 @@ struct Message {
 }
 
 extension Message: MessageType {
-    var sender: SenderType {
-        return Sender(id: member.name, displayName: member.name)
-    }
-    
-//    var sentDate: Date {
-//        return Date()
-//    }
     
     var kind: MessageKind {
         return .text(text)
@@ -78,7 +74,7 @@ extension Message: DatabaseRepresentation {
 
 extension Message: Comparable {
     static func == (lhs: Message, rhs: Message) -> Bool {
-        return lhs.sentDate == rhs.sentDate
+        return lhs.messageId == rhs.messageId
     }
     static func < (lhs: Message, rhs: Message) -> Bool {
         return lhs.sentDate < rhs.sentDate
