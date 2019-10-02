@@ -9,5 +9,7 @@ target 'EnglishStudies' do
   pod 'Firebase/Auth'
   pod 'FirebaseUI'
   pod 'MessageKit'  
+  pod 'FirebaseUI/Storage'
+  pod 'Firebase/Messaging'
 
 end

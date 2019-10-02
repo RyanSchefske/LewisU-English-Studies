@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class ImageZoomViewController: UIViewController {
+    
+    var selectedPhoto = ""
+    let storageRef = Storage.storage().reference()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,12 +21,16 @@ class ImageZoomViewController: UIViewController {
         navigationController?.title = "Digital Gallery"
         
         setupViews()
+        
+        print(selectedPhoto)
+        
+        let reference = storageRef.child("images/\(selectedPhoto)")
+        imageView.sd_setImage(with: reference)
     }
     
     let imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        //image.image = UIImage(named: "pin")
         return image
     }()
     

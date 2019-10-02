@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfessorDetailViewController: UIViewController {
 
@@ -18,35 +19,14 @@ class ProfessorDetailViewController: UIViewController {
     @IBOutlet var officeOutlet: UIButton!
     
     var professorLastName = ""
-    var professorName = ""
-    var phoneNumber = ""
-    var number = ""
-    var email = ""
-    var bio = ""
-    var office = ""
+    var professor = ["name": "", "phone": "", "email": "", "bio": "", "office": ""]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        professorName = getInfo(professor: professorLastName).name
-        if professorName != "" {
-            self.title = professorName
-        } else {
-            self.title = "Details"
-        }
+        getDetails(last: professorLastName)
         
-        phoneNumber = getInfo(professor: professorLastName).phoneNumber
-        number = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
-        email = getInfo(professor: professorLastName).email
-        office = getInfo(professor: professorLastName).office
-        bio = getInfo(professor: professorLastName).bio
-        
-        phoneNumberOutlet.setTitle(phoneNumber, for: .normal)
-        emailOutlet.setTitle(email, for: .normal)
-        websiteOutlet.setTitle("Website", for: .normal)
-        officeOutlet.setTitle(office, for: .normal)
-        bioOutlet.text = bio
-        imageView.image = UIImage(named: professorLastName)
+        title = professorLastName
         
         phoneNumberOutlet.layer.cornerRadius = self.phoneNumberOutlet.frame.height / 2
         emailOutlet.layer.cornerRadius = self.emailOutlet.frame.height / 2
@@ -55,17 +35,34 @@ class ProfessorDetailViewController: UIViewController {
     }
     
     @IBAction func callClicked(_ sender: Any) {
-        if let url = URL(string: "tel://\(self.number)") {
-            UIApplication.shared.open(url)
+        if let phone = professor["phone"] {
+            if phone != "" {
+                let number = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
+                if let url = URL(string: "tel://\(number)") {
+                    UIApplication.shared.open(url)
+                }
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Email not found", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
         }
     }
     
     @IBAction func emailClicked(_ sender: Any) {
-        if let url = URL(string: "mailto:\(getInfo(professor: professorLastName).email)") {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url)
+        if let email = professor["email"] {
+            if email != "" {
+                if let url = URL(string: "mailto:\(email)") {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url)
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
             } else {
-                UIApplication.shared.openURL(url)
+                let alert = UIAlertController(title: "Error", message: "Email not found", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
             }
         }
     }
@@ -82,106 +79,35 @@ class ProfessorDetailViewController: UIViewController {
         }
     }
     
-}
-
-func getInfo(professor: String) -> (name: String, phoneNumber: String, email: String, bio: String, office: String) {
-    var name: String = ""
-    var phoneNumber: String = ""
-    var email: String = ""
-    var bio: String = ""
-    var office: String = ""
-    
-    if professor == "Mishra" {
-        name = "Dr. Pramod Mishra"
-        phoneNumber = "(815) 836-5016"
-        email = "mishrapr@lewisu.edu"
-        bio = "Dr. Mishra is the Chair of the department, handling department business and student advising."
-        office = "DL-221-N"
-    } else if professor == "Kukler" {
-        name = "Dr. Jennifer Consilio Kukler"
-        phoneNumber = "(815) 836-5727"
-        email = "consilje@lewisu.edu"
-        bio = "Director of the Writing Center"
-        office = "Library - Writing Center"
-    } else if professor == "Gettys" {
-        name = "Dr. Serafima Gettys"
-        phoneNumber = "(815) 836-5544"
-        email = "gettyse@lewisu.edu"
-        bio = "Director of Foreign Language Program."
-        office = "MC-005"
-    } else if professor == "Hu" {
-        name = "Ms. Lifeng Hu"
-        phoneNumber = "(815) 836-5319"
-        email = "huli@lewisu.edu"
-        bio = "Assistant Professor"
-        office = "MC-006"
-    } else if professor == "Jones" {
-        name = "Ms. Therese Jones"
-        phoneNumber = "(815) 836-5321"
-        email = "jonesth@lewisu.edu"
-        bio = "Director of Writing Placement. Editor and Coordinator of Windows Fine Arts Magazine."
-        office = "DL-206-N"
-    } else if professor == "Kennedy" {
-        name = "Dr. Sheila Kennedy"
-        phoneNumber = "(815) 836-5580"
-        email = "kennedsh@lewisu.edu"
-        bio = "Director of First Year Writing"
-        office = "DL-214-N"
-    } else if professor == "Kyburz" {
-        name = "Dr. Bonnie Lenore Kyburz"
-        phoneNumber = "(815) 836-5565"
-        email = "kyburzbl@lewisu.edu"
-        bio = "Assistant Professor"
-        office = "DL-211-N"
-    } else if professor == "Letcher" {
-        name = "Dr. Mark Letcher"
-        phoneNumber = "(815) 836-5601"
-        email = "letchema@lewisu.edu"
-        bio = "Assistant Professor"
-        office = "DL-215-N"
-    } else if professor == "Muench" {
-        name = "Dr. Simone Muench"
-        phoneNumber = "(815) 836-5554"
-        email = "muenchsi@lewisu.edu"
-        bio = "Director of Creative Writing"
-        office = "DL-216-N"
-    } else if professor == "Mustafa" {
-        name = "Dr. Jamil Mustafa"
-        phoneNumber = "(815) 836-5691"
-        email = "mustafja@lewisu.edu"
-        bio = "Professor"
-        office = "DL-208-N"
-    } else if professor == "Oelschlegel" {
-        name = "Dr. Lawrence Oelschlegel"
-        phoneNumber = "(815) 836-5506"
-        email = "oelschla@lewisu.edu"
-        bio = "Professor"
-        office = "DL-204-N"
-    } else if professor == "Philippian" {
-        name = "Dr. Mardy Philippian"
-        phoneNumber = "(815) 836-5287"
-        email = "philipmd@lewisu.edu"
-        bio = "Assistant Professor"
-        office = "DL-212-N"
-    } else if professor == "Ross" {
-        name = "Dr. Wallace Ross"
-        phoneNumber = "(815) 836-5122"
-        email = "rosswa@lewisu.edu"
-        bio = "Assistant Professor"
-        office = "DL-209-N"
-    } else if professor == "White" {
-        name = "Dr. Jackie White"
-        phoneNumber = "(815) 836-5492"
-        email = "whiteja@lewisu.edu"
-        bio = "Professor"
-        office = "DL-217-N"
-    } else if professor == "Wielgos" {
-        name = "Dr. Christopher Wielgos"
-        phoneNumber = "(815) 836-5873"
-        email = "wielgoch@lewisu.edu"
-        bio = "Director of Film Studies and Director of Pedagogical Technologies"
-        office = "DL-218-N"
+    func getDetails(last: String) {
+        let db = Firestore.firestore()
+        _ = db.collection("professors").whereField("picture", isEqualTo: last)
+            .getDocuments { (snapshot, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                } else {
+                    for document in snapshot!.documents {
+                        let data = document.data()
+                        self.professor["name"] = data["name"] as? String
+                        self.professor["phone"] = data["phoneNumber"] as? String
+                        self.professor["email"] = data["email"] as? String
+                        self.professor["office"] = data["office"] as? String
+                        self.professor["bio"] = data["bio"] as? String
+                    }
+                    self.title = self.professor["name"]
+                    self.phoneNumberOutlet.setTitle(self.professor["phone"], for: .normal)
+                    self.emailOutlet.setTitle(self.professor["email"], for: .normal)
+                    self.websiteOutlet.setTitle("Website", for: .normal)
+                    self.officeOutlet.setTitle(self.professor["office"], for: .normal)
+                    self.bioOutlet.text = self.professor["bio"]
+                    
+                    //self.imageView.image = UIImage(named: self.professorLastName)
+                    
+                    let storageRef = Storage.storage().reference()
+                    let reference = storageRef.child("professorPictures/\(self.professorLastName).png")
+                    self.imageView.sd_setImage(with: reference)
+                }
+        }
     }
     
-    return (name, phoneNumber, email, bio, office)
 }

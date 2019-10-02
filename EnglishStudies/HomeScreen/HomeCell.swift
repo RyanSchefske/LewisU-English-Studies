@@ -44,7 +44,7 @@ class HomeCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
+        //imageView.layer.cornerRadius = 10
         return imageView
     }()
     
@@ -57,6 +57,12 @@ class HomeCell: UICollectionViewCell {
         } else {
             label.font = label.font.withSize(24)
         }
+        
+        label.layer.shadowColor = UIColor.lightGray.cgColor
+        label.layer.shadowRadius = 1
+        label.layer.shadowOpacity = 1
+        label.layer.shadowOffset = CGSize(width: 2, height: 2)
+        
         return label
     }()
     
@@ -70,6 +76,7 @@ class HomeCell: UICollectionViewCell {
             label.font = label.font.withSize(13)
         }
         label.numberOfLines = 0
+        
         return label
     }()
     
@@ -78,8 +85,8 @@ class HomeCell: UICollectionViewCell {
         cellImageView.addSubview(titleLabel)
         cellImageView.addSubview(subTitleLabel)
         
-        addConstraintsWithFormat(format: "H:|-12-[v0]-12-|", views: cellImageView)
-        addConstraintsWithFormat(format: "V:|-6-[v0]-6-|", views: cellImageView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: cellImageView)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: cellImageView)
         
         //subTitleLabel Constraints
         //Left Constriant

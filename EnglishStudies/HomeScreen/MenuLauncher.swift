@@ -33,7 +33,7 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
     
     //Menu Cells
     let settings: [Setting] = {
-        return [Setting(name: "English Studies @ LewisU", imageName: "home"), Setting(name: "News and Events", imageName: "document"), Setting(name: "English Studies on Facebook", imageName: "facebook"), Setting(name: "Portfolium", imageName: "resume"), Setting(name: "The English Department", imageName: "emailAt"), Setting(name: "World Languages Program", imageName: "graduationCap"), Setting(name: "Film Studies Program", imageName: "film"), Setting(name: "Writing Center", imageName: "pencil"), Setting(name: "OWL - Online Writing Center", imageName: "website"), Setting(name: "Resources for Research", imageName: "search"), Setting(name: "Resources for Writers", imageName: "writer"), Setting(name: "Jet Fuel Review", imageName: "globe"), Setting(name: "The Jet Fuel Blog", imageName: "airplane"), Setting(name: "Windows Fine Arts Magazine", imageName: "magazine"), Setting(name: "Romeoville Campus on GPS", imageName: "pin"), Setting(name: "Digital Gallery", imageName: "gallery"), Setting(name: "Chat Room for Students", imageName: "chat"), Setting(name: "Professors", imageName: "contacts"), Setting(name: "Podcasts", imageName: "headphones"), Setting(name: "Settings", imageName: "settings"), Setting(name: "About", imageName: "info")]
+        return [Setting(name: "English Studies @ LewisU", imageName: "home"), Setting(name: "News and Events", imageName: "document"), Setting(name: "English Studies on Facebook", imageName: "facebook"), Setting(name: "Portfolium", imageName: "resume"), Setting(name: "The English Department", imageName: "emailAt"), Setting(name: "World Languages Program", imageName: "graduationCap"), Setting(name: "Film Studies Program", imageName: "film"), Setting(name: "Writing Center", imageName: "pencil"), Setting(name: "OWL - Online Writing Center", imageName: "website"), Setting(name: "Resources for Research", imageName: "search"), Setting(name: "Resources for Writers", imageName: "writer"), Setting(name: "Jet Fuel Review", imageName: "globe"), Setting(name: "The Jet Fuel Blog", imageName: "airplane"), Setting(name: "Windows Fine Arts Magazine", imageName: "magazine"), Setting(name: "Romeoville Campus on GPS", imageName: "pin"), Setting(name: "Digital Gallery", imageName: "gallery"), Setting(name: "Chat Room for Students", imageName: "chat"), Setting(name: "Professors", imageName: "contacts"), Setting(name: "Settings", imageName: "settings"), Setting(name: "About", imageName: "info")]
     }()
     var homePageController: HomePageViewController?
     let cellHeight: CGFloat = 60
@@ -101,6 +101,8 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
             cell.backgroundColor = UIColor.darkGray
             cell.nameLabel.textColor = UIColor.white
             cell.iconImageView.tintColor = UIColor.white
+        } else {
+            cell.isHighlighted = false
         }
         
         return cell
@@ -187,8 +189,6 @@ class MenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSour
                     let layout = UICollectionViewFlowLayout()
                     self.homePageController?.navigationController?.pushViewController(ProfessorsViewController(collectionViewLayout: layout), animated: true)
                 } else if indexPath.item == 18 {
-                    self.homePageController?.showWebForSetting(setting: setting, url: "https://www.pwastore.com/w/english-studies-at-lewisu/folder_1506701350955_71")
-                } else if indexPath.item == 19 {
                     self.homePageController?.showSettingsController()
                 } else {
                     self.homePageController?.showAboutController()

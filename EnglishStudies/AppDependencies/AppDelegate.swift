@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -19,6 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+        UNUserNotificationCenter.current().delegate = self
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+        application.registerForRemoteNotifications()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()

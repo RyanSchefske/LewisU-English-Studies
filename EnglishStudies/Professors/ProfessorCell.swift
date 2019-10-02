@@ -24,8 +24,8 @@ class ProfessorCell: UICollectionViewCell {
     func setupViews() {
         addSubview(cellImageView)
         
-        addConstraintsWithFormat(format: "H:|-12-[v0]-12-|", views: cellImageView)
-        addConstraintsWithFormat(format: "V:|-6-[v0]-6-|", views: cellImageView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: cellImageView)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: cellImageView)
     }
     
     required init?(coder aDecoder: NSCoder) {

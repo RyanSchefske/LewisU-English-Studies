@@ -9,6 +9,9 @@
 import UIKit
 
 class AboutViewController: UIViewController {
+    
+    let versionNumber: String? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +45,9 @@ class AboutViewController: UIViewController {
         versionLabel.textColor = .black
         versionLabel.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 3)
         versionLabel.textAlignment = .center
-        versionLabel.text = "Version Number: 1.1"
+        if let version = versionNumber {
+            versionLabel.text = "Version Number: \(version)"
+        }
         self.view.addSubview(versionLabel)
     }
 }

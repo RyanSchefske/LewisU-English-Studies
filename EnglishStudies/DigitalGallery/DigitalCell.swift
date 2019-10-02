@@ -12,6 +12,7 @@ class DigitalCell: BaseCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupViews()
     }
     
     let cellImageView: UIImageView = {

@@ -60,11 +60,11 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = view.frame.height / 2.5
-        return CGSize(width: view.frame.width, height: height)
+        return CGSize(width: view.frame.width - 10, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 5
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -126,7 +126,7 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
         cell.alpha = 0
         cell.contentView.alpha = 0
         cell.layer.transform = CATransform3DMakeScale(0.25, 0.25, 0.25)
-                
+        
         UIView.animate(withDuration: 0.65) {
             cell.alpha = 1
             cell.contentView.alpha = 1
@@ -153,10 +153,12 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
             height = 200
         }
         
-        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
+        collectionView.showsVerticalScrollIndicator = false
+        
+        collectionView.contentInset = UIEdgeInsets(top: height + 5, left: 0, bottom: 5, right: 0)
         
         imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
-        imageView.image = UIImage.init(named: "EnglishStudies")
+        imageView.image = UIImage.init(named: "Courtyard")
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         view.addSubview(imageView)
@@ -166,9 +168,10 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.isTranslucent = false
         collectionView.backgroundColor = UIColor(red:142/255, green:37/255, blue:49/255, alpha:1.0)
+        //collectionView.backgroundColor = .white
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "cellId")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(handleMenu))
-        navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        setUpMenuButton()
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleMenu))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
@@ -176,7 +179,7 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y: Int = Int(height - (scrollView.contentOffset.y + height))
+        let y: Int = Int(height - (scrollView.contentOffset.y + height + 5))
         var max = 400
         if UIDevice.current.userInterfaceIdiom == .pad {
             max = 750
@@ -226,6 +229,21 @@ class HomePageViewController: UICollectionViewController, UICollectionViewDelega
     func showAboutController() {
         let aboutController = AboutViewController()
         navigationController?.pushViewController(aboutController, animated: true)
+    }
+    
+    func setUpMenuButton(){
+        let menuBtn = UIButton(type: .custom)
+        menuBtn.frame = CGRect(x: 0.0, y: 0.0, width: 20, height: 20)
+        menuBtn.setImage(UIImage(named:"menu")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        menuBtn.addTarget(self, action: #selector(handleMenu), for: UIControl.Event.touchUpInside)
+        
+        let menuBarItem = UIBarButtonItem(customView: menuBtn)
+        let currWidth = menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 30)
+        currWidth?.isActive = true
+        let currHeight = menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 30)
+        currHeight?.isActive = true
+        self.navigationItem.leftBarButtonItem = menuBarItem
+        self.navigationItem.leftBarButtonItem?.tintColor = .white
     }
     
     func firstLaunchAlert() {
